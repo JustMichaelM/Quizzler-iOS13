@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("Lubie Placki!")
         // Do any additional setup after loading the view.
     }
 
