@@ -9,50 +9,36 @@
 import Foundation
 
 struct QuizBrain {
-    let quiz = [
+    let quiz: [Question] = [
         Question(text: "Four + Two is equal to Six", correctAnswer: "True"),
         Question(text: "Five - Three is greater than One", correctAnswer: "True"),
         Question(text: "Three + Eight is less than Ten", correctAnswer: "False")
     ]
     
-    var quizComplete: Bool = false
     var questionNumber: Int = 0
     var score: Int = 0
     
-    func checkAnswer(_ answer: String) -> Bool {
+    mutating func checkAnswer(_ answer: String) -> Bool {
+        
         if answer == quiz[questionNumber].correctAnswer {
+            score += 1
+            questionNumber += 1
             return true
         } else {
+            questionNumber += 1
             return false
         }
     }
     
-    mutating func nextQuestion() {
-        questionNumber += 1
-        
-        if questionNumber == quiz.count {
-            quizComplete = true
+    mutating func isQuizComplete() -> Bool {
+        if questionNumber >= quiz.count {
+            return true
         }
-    }
-    
-    func getScore() -> Int {
-        return score
-    }
-    
-    mutating func addScore() {
-        score += 1
+        return false
     }
     
     func getQuestionText() -> String {
         return quiz[questionNumber].text
-    }
-    
-    func getQuestionNumber() -> Int {
-        return questionNumber
-    }
-    
-    func getQuestionCount() -> Int {
-        return quiz.count
     }
     
     func progressBarUpdate() -> Float {

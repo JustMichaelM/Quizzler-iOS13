@@ -21,15 +21,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         print("Lubie Placki!")
         progressBar.progress = 0.0
-        scoreLabel.text = "Score: \(quizBrain.getScore())"
-        updateUI()
+        scoreLabel.text = "Score: \(quizBrain.score)"
+        questionLabel.text = quizBrain.getQuestionText()
     }
     
     @IBAction func answerButtonPressed(_ sender: UIButton) {
         let userAnswer: String = sender.currentTitle!
         let userGotIt: Bool = quizBrain.checkAnswer(userAnswer)
-        
-        let question = quizBrain.getQuestionText()
         
         if userGotIt{
             sender.backgroundColor = UIColor.green
@@ -37,35 +35,29 @@ class ViewController: UIViewController {
             sender.backgroundColor = UIColor.red
         }
         
-        if quizBrain.getQuestionNumber() + 1 < quizBrain.getQuestionCount() {
-            questionNumber += 1
-            
-        }
-            
         updateUI()
-        updateProgressBar()
         
-        if questionNumber == quiz.count - 1 {
-                quizComplete = true
-        }
     }
-        
+    
     func updateUI() {
-        
-        if quizBrain.quizComplete == false {
-            questionLabel.text = quizBrain.getQuestionText()
-        } else {
-            questionLabel.text = "Quiz Complete!"
-        }
         
         UIView.animate(withDuration: 0.8) {
             self.trueButton.backgroundColor = UIColor.clear
             self.falseButton.backgroundColor = UIColor.clear
             }
+        
+        progressBar.progress += quizBrain.progressBarUpdate()
+        
+        if quizBrain.isQuizComplete() {
+            scoreLabel.alpha = 0.0
+            questionLabel.text = "Quiz Complete! Your Score: \(quizBrain.score)"
+            trueButton.isEnabled = false
+            falseButton.isEnabled = false
+            return
         }
-    
-    func updateProgressBar() {
-        progressBar.progress += 1 / Float(quizBrain.quiz.count)
+        
+        questionLabel.text = self.quizBrain.getQuestionText()
+        scoreLabel.text = "Score: \(quizBrain.score)"
         }
     }
 
