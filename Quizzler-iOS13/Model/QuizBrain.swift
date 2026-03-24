@@ -9,14 +9,14 @@
 import Foundation
 
 struct QuizBrain {
-    let quiz: [Question] = [
+    private let quiz: [Question] = [
         Question(text: "Four + Two is equal to Six", correctAnswer: "True"),
         Question(text: "Five - Three is greater than One", correctAnswer: "True"),
         Question(text: "Three + Eight is less than Ten", correctAnswer: "False")
     ]
     
-    var questionNumber: Int = 0
-    var score: Int = 0
+    private var questionNumber: Int = 0
+    private(set) var score: Int = 0
     
     mutating func checkAnswer(_ answer: String) -> Bool {
         let isCorrect: Bool = answer == quiz[questionNumber].correctAnswer
@@ -36,8 +36,10 @@ struct QuizBrain {
         return false
     }
     
-    func getNextQuestion() -> String {
-        return quiz[questionNumber].text
+    var getNextQuestion: String {
+        // Computed Property
+        // Zamiast typowego gettera i settera
+        quiz[questionNumber].text
     }
     
     func progressBarUpdate() -> Float {

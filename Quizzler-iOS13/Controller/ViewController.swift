@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         print("Lubie Placki!")
         progressBar.progress = 0.0
         scoreLabel.text = "Score: \(quizBrain.score)"
-        questionLabel.text = quizBrain.getNextQuestion()
+        questionLabel.text = quizBrain.getNextQuestion
     }
     
     @IBAction func answerButtonPressed(_ sender: UIButton) {
@@ -49,7 +49,7 @@ class ViewController: UIViewController {
             return
         }
         
-        questionLabel.text = self.quizBrain.getNextQuestion()
+        questionLabel.text = self.quizBrain.getNextQuestion
         scoreLabel.text = "Score: \(quizBrain.score)"
     }
     
