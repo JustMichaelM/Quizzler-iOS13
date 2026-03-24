@@ -30,14 +30,14 @@ struct QuizBrain {
         }
     }
     
-    mutating func isQuizComplete() -> Bool {
+    func isQuizComplete() -> Bool {
         if questionNumber >= quiz.count {
             return true
         }
         return false
     }
     
-    func getQuestionText() -> String {
+    func getNextQuestion() -> String {
         return quiz[questionNumber].text
     }
     
