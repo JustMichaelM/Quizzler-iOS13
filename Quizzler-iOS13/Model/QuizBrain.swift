@@ -19,15 +19,14 @@ struct QuizBrain {
     var score: Int = 0
     
     mutating func checkAnswer(_ answer: String) -> Bool {
+        let isCorrect: Bool = answer == quiz[questionNumber].correctAnswer
         
-        if answer == quiz[questionNumber].correctAnswer {
+        if isCorrect {
             score += 1
-            questionNumber += 1
-            return true
-        } else {
-            questionNumber += 1
-            return false
         }
+        
+        questionNumber += 1
+        return isCorrect
     }
     
     func isQuizComplete() -> Bool {
