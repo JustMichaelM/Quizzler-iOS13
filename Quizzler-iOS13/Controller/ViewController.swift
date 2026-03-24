@@ -44,20 +44,24 @@ class ViewController: UIViewController {
         UIView.animate(withDuration: 0.8) {
             self.trueButton.backgroundColor = UIColor.clear
             self.falseButton.backgroundColor = UIColor.clear
-            }
+        }
         
         progressBar.progress += quizBrain.progressBarUpdate()
         
         if quizBrain.isQuizComplete() {
-            scoreLabel.alpha = 0.0
-            questionLabel.text = "Quiz Complete! Your Score: \(quizBrain.score)"
-            trueButton.isEnabled = false
-            falseButton.isEnabled = false
+            endQuiz()
             return
         }
         
         questionLabel.text = self.quizBrain.getQuestionText()
         scoreLabel.text = "Score: \(quizBrain.score)"
-        }
     }
+    
+    func endQuiz() {
+        scoreLabel.alpha = 0.0
+        questionLabel.text = "Quiz Complete! Your Score: \(quizBrain.score)"
+        trueButton.isEnabled = false
+        falseButton.isEnabled = false
+    }
+}
 
